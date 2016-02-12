@@ -15,7 +15,6 @@
     "src/greeter.ts",
     "src/index.ts",
     "src/routes.ts",
-    "src/another/greeter.ts",
     "src/viz/viz.routes.ts",
     "src/viz/viz.services.ts"
   ]
