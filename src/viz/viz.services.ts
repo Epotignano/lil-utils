@@ -12,11 +12,14 @@ var binPath = phantomjs.path;
 import { defer, IPromise } from 'q';
 import { join } from 'path';
 import { execFile } from 'child_process';
+import { format } from 'util';
 
 var driver = require('node-phantom-simple');
 var _childArgs = [
   join(__dirname, 'phantomjs-script.js')
 ];
+import { base64Image } from '../utilities/images';
+
 import { readFile } from 'fs';
 
 class VizServices {
@@ -42,10 +45,8 @@ class VizServices {
                   height: result.height
                 };
                 page.render('google.png', { format: 'png', quality: 100 }, (err, status) => {
-                  readFile('./google.png', (err, data) => {
-                    if (err) { throw err; }
-                    _htmlScreenshotPromise.resolve({ image: data });
-                  });
+                  if (err) { throw err; }
+                  _htmlScreenshotPromise.resolve({ image: base64Image('./google.png') });
                 });
               });
             }, 5000);

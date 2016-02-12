@@ -1,7 +1,1 @@
-coverage/
-node_modules/
-typings/
-npm-debug.log
-.idea/
-.vscode/
-lib/
+coverage/node_modules/typings/npm-debug.log.idea/.vscode/lib/
