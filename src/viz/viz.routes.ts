@@ -10,8 +10,9 @@ var vizRoutes = [{
   method: 'GET',
   path: _prefix + '/screenshot',
   handler: function(request, reply) {
-    generateHTMLScreenshot();
-    reply('SOPU!');
+    generateHTMLScreenshot().then((result) => {
+      reply(result);
+    });
   }
 }];
 

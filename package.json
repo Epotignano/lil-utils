@@ -21,6 +21,7 @@
     "lout": "^8.1.1",
     "node-phantom-simple": "^2.2.4",
     "phantomjs-prebuilt": "^2.1.4",
+    "q": "^1.4.1",
     "vision": "^4.0.1"
   },
   "devDependencies": {
