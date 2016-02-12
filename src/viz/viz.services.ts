@@ -7,13 +7,17 @@
 
 var phantomjs = require('phantomjs-prebuilt');
 var binPath = phantomjs.path;
+
 import { defer, IPromise } from 'q';
 import { join } from 'path';
 import { execFile } from 'child_process';
+
 var driver = require('node-phantom-simple');
 var _childArgs = [
   join(__dirname, 'phantomjs-script.js')
 ];
+import { readFile } from 'fs';
+
 class VizServices {
   public static generateHTMLScreenshot() : IPromise  {
 
@@ -36,16 +40,19 @@ class VizServices {
                   width:  result.width,
                   height: result.height
                 };
-                _htmlScreenshotPromise.resolve(page.render('google.png', { format: 'png', quality : 100}));
+                page.render(join(__dirname, 'google.png'), { format: 'png', quality : 100}, (err, status) => {
+                  var _image = readFile(join(__dirname, 'google.png'), (err, data) => {
+                    if (err) { throw err; }
+                    _htmlScreenshotPromise.resolve({data});
+                  });
+                });
                 browser.exit();
               });
-
             }, 5000);
           });
         });
       });
     });
-
     return _htmlScreenshotPromise.promise;
   }
 }
