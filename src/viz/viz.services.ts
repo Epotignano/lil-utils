@@ -1,3 +1,4 @@
+import {read} from 'fs';
 /**
  * Created by epotignano on 11/02/16.
  */
@@ -40,13 +41,12 @@ class VizServices {
                   width:  result.width,
                   height: result.height
                 };
-                page.render(join(__dirname, 'google.png'), { format: 'png', quality : 100}, (err, status) => {
-                  var _image = readFile(join(__dirname, 'google.png'), (err, data) => {
+                page.render('google.png', { format: 'png', quality: 100 }, (err, status) => {
+                  readFile('./google.png', (err, data) => {
                     if (err) { throw err; }
-                    _htmlScreenshotPromise.resolve({data});
+                    _htmlScreenshotPromise.resolve({ image: data });
                   });
                 });
-                browser.exit();
               });
             }, 5000);
           });
